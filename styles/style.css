@@ -59,6 +59,14 @@ button {
   color: #ffffff;
   font-size: 20px;
   text-transform: uppercase;
+  cursor: pointer;
+}
+
+button:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
 }
 
 button i {
@@ -78,7 +86,7 @@ body {
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   background: #6ab04c;
-  width: 90%;
+  width: 80%;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr;
@@ -90,7 +98,7 @@ body {
 }
 
 .bg-image {
-  background-image: url(../img/background.jpg);
+  background-image: url(../img/background1.jpg);
   background-size: cover;
   background-position: center;
   position: relative;
@@ -107,17 +115,31 @@ body {
 
 .btn-roll {
   position: absolute;
-  top: 65%;
+  top: 62%;
 }
 
 .btn-hold {
   position: absolute;
-  top: 75%;
+  top: 72%;
 }
 
 .player-0-panel,
 .player-1-panel {
-  margin: 100px;
+  padding: 100px 0;
+  height: 550px;
+  width: 100%;
+}
+
+.active .player-name {
+  font-weight: 300;
+}
+
+.active .player-name:after, .active .player-name:before {
+  content: "\22C6";
+}
+
+.active {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .player-name {
