@@ -27,12 +27,16 @@ gameInit();
 
 document.querySelector('.btn-roll').addEventListener('click', function() {
     if (isGameEnd) {
-        let diceRandom = Math.floor((Math.random()*6)+1);
-        let diceDOM = document.querySelector('.dice');
-        diceDOM.style.display = 'block';
-        diceDOM.src = 'img/dice-' + diceRandom + '.png';
-        if (diceRandom !== 1) {
-            playersRoundScore += diceRandom;
+        let diceRandom1 = Math.floor((Math.random()*6)+1);
+        let diceRandom2 = Math.floor((Math.random()*6)+1);
+        let diceDOM1 = document.querySelector('.dice-1');
+        let diceDOM2 = document.querySelector('.dice-2');
+        diceDOM1.style.display = 'block';
+        diceDOM2.style.display = 'block';
+        diceDOM1.src = 'img/dice-' + diceRandom1 + '.png';
+        diceDOM2.src = 'img/dice-' + diceRandom2 + '.png';
+        if (diceRandom1 !== 1 && diceRandom2 !== 1) {
+            playersRoundScore += (diceRandom1 + diceRandom2);
             document.getElementById('current-' + activePlayer).textContent = playersRoundScore;
         } else {
             activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
@@ -41,7 +45,8 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
             document.getElementById('current-1').textContent = '0';
             document.querySelector('.player-0-panel').classList.toggle('active');
             document.querySelector('.player-1-panel').classList.toggle('active');
-            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.dice-1').style.display = 'none';
+            document.querySelector('.dice-2').style.display = 'none';
         }
     }
 });
@@ -52,7 +57,8 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
         document.getElementById('score-' + activePlayer).textContent = mainScores[activePlayer];
         if (mainScores[activePlayer] >= 20) {
             document.getElementById('name-' + activePlayer).textContent = 'Winner!';
-            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.dice-1').style.display = 'none';
+            document.querySelector('.dice-2').style.display = 'none';
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
             document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
             isGameEnd = false;
@@ -63,7 +69,8 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
             document.getElementById('current-1').textContent = '0';
             document.querySelector('.player-0-panel').classList.toggle('active');
             document.querySelector('.player-1-panel').classList.toggle('active');
-            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.dice-1').style.display = 'none';
+            document.querySelector('.dice-2').style.display = 'none';
         }
     }
 });

@@ -160,10 +160,18 @@ body {
     font-weight: 300;
 }
 
-.dice {
+.dice-1 {
     position: absolute;
     width: 100px;
     top: 30%;
+    left: 40%;
+}
+
+.dice-2 {
+    position: absolute;
+    width: 100px;
+    top: 30%;
+    left: 50.75%;
 }
 
 .winner .player-name,
