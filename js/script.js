@@ -2,14 +2,32 @@ let playersRoundScore;
 let activePlayer;
 let mainScores;
 let isGameEnd;
+let setScore;
+let test;
 
+document.querySelector('.wrapper').style.display = 'none';
+document.querySelector('#setScoreBtn').addEventListener('click', setGameScore);
 
+function setGameScore() {
+    let text;
+    document.querySelector('.wrapper').style.display = 'none';
+    setScore = document.getElementById('scoreInput').value;
+    if (setScore < 20) {
+        text = 'You haven\'t typed number greater than 20. Try again';
+    } else {
+        document.querySelector('.input').style.display = 'none';
+        document.querySelector('.wrapper').style.display = '';
+        gameInit();
+    }
+    document.querySelector('.textInfo').innerHTML = text;
+}
 
 function gameInit() {
     mainScores = [0, 0];
     playersRoundScore = 0;
     activePlayer = 0;
     isGameEnd = true;
+    document.querySelector('.input').style.display = 'none';
     document.getElementById('score-0').textContent = '0';
     document.getElementById('current-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';
@@ -22,8 +40,6 @@ function gameInit() {
     document.querySelector('.player-1-panel').classList.remove('active');
     document.querySelector('.player-0-panel').classList.add('active');
 }
-
-gameInit();
 
 document.querySelector('.btn-roll').addEventListener('click', function() {
     if (isGameEnd) {
@@ -55,7 +71,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     if (isGameEnd) {
         mainScores[activePlayer] += playersRoundScore;
         document.getElementById('score-' + activePlayer).textContent = mainScores[activePlayer];
-        if (mainScores[activePlayer] >= 20) {
+        if (mainScores[activePlayer] >= setScore) {
             document.getElementById('name-' + activePlayer).textContent = 'Winner!';
             document.querySelector('.dice-1').style.display = 'none';
             document.querySelector('.dice-2').style.display = 'none';
@@ -75,4 +91,9 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     }
 });
 
-document.querySelector('.btn-new').addEventListener('click', gameInit);
+document.querySelector('.btn-new').addEventListener('click', function() {
+    document.getElementById('scoreInput').value = '';
+    document.querySelector('.textInfo').innerHTML = '';
+    document.querySelector('.wrapper').style.display = 'none';
+    document.querySelector('.input').style.display = '';
+});

@@ -53,6 +53,41 @@ table {
           box-sizing: border-box;
 }
 
+.input {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: 3;
+  background: #ffffff;
+  border: 1px solid #000000;
+  padding: 10px;
+}
+
+.input p {
+  margin: 10px auto;
+  font-size: 12px;
+}
+
+.input #scoreInput {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #000000;
+}
+
+.input #setScoreBtn {
+  margin: 0 auto;
+  display: block;
+  color: #000000;
+  border: 1px solid #000000;
+  background: #f9ca24;
+}
+
+.input #setScoreBtn i {
+  color: #000000;
+}
+
 button {
   background: none;
   border: none;
