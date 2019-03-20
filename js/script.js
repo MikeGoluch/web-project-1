@@ -4,6 +4,8 @@ let mainScores;
 let isGameEnd;
 let setScore;
 let test;
+let prevDice1;
+let prevDice2;
 
 
 document.querySelector('.wrapper').style.display = 'none';
@@ -28,6 +30,10 @@ function gameInit() {
     playersRoundScore = 0;
     activePlayer = 0;
     isGameEnd = true;
+    let diceDOM1 = document.querySelector('.dice-1');
+    let diceDOM2 = document.querySelector('.dice-2');
+    diceDOM1.style.display = 'block';
+    diceDOM2.style.display = 'block';
     document.querySelector('.input').style.display = 'none';
     document.getElementById('score-0').textContent = '0';
     document.getElementById('current-0').textContent = '0';
@@ -49,18 +55,14 @@ function nextPlayersTurn() {
     document.getElementById('current-1').textContent = '0';
     document.querySelector('.player-0-panel').classList.toggle('active');
     document.querySelector('.player-1-panel').classList.toggle('active');
-    document.querySelector('.dice-1').style.display = 'none';
-    document.querySelector('.dice-2').style.display = 'none';
+    document.querySelector('.dice-1').style.display = 'block';
+    document.querySelector('.dice-2').style.display = 'block';
 }
 
 document.querySelector('.btn-roll').addEventListener('click', function() {
-    // let prevDice1;
-    // let prevDice2;
-    let diceRandom1;
-    let diceRandom2;
     if (isGameEnd) {
-        diceRandom1 = Math.floor((Math.random()*6)+1);
-        diceRandom2 = Math.floor((Math.random()*6)+1);
+        let diceRandom1 = Math.floor((Math.random()*6)+1);
+        let diceRandom2 = Math.floor((Math.random()*6)+1);
         let diceDOM1 = document.querySelector('.dice-1');
         let diceDOM2 = document.querySelector('.dice-2');
         diceDOM1.style.display = 'block';
@@ -68,21 +70,20 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         diceDOM1.src = 'img/dice-' + diceRandom1 + '.png';
         diceDOM2.src = 'img/dice-' + diceRandom2 + '.png';
         
-        // if (diceRandom1 === 6 && prevDice1 === 6) {
-        //     // mainScores[activePlayer] = 0;
-        //     // document.getElementById('score-' + activePlayer).textContent = mainScores[activePlayer];
-        //     // nextPlayersTurn();
-        //     console.log('tak jest!');
-        // }
+        if ((diceRandom1 === 6 && prevDice1 === 6) || (diceRandom2 === 6 && prevDice2 === 6) || (diceRandom1 === 6 && prevDice2 === 6) || (diceRandom2 === 6 && prevDice1 === 6)) {
+            mainScores[activePlayer] = 0;
+            document.getElementById('score-' + activePlayer).textContent = '0';
+            nextPlayersTurn();
+        }
         if (diceRandom1 !== 1 && diceRandom2 !== 1) {
             playersRoundScore += (diceRandom1 + diceRandom2);
             document.getElementById('current-' + activePlayer).textContent = playersRoundScore;
         } else {
             nextPlayersTurn();
         }
+        prevDice1 = diceRandom1;
+        prevDice2 = diceRandom2;
     }
-    // prevDice1 = diceRandom1;
-    // prevDice2 = diceRandom2;
 });
 
 document.querySelector('.btn-hold').addEventListener('click', function() {
@@ -110,8 +111,10 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
 });
 
 document.querySelector('.btn-new').addEventListener('click', function() {
+    gameInit();
     document.getElementById('scoreInput').value = '';
     document.querySelector('.textInfo').innerHTML = '';
     document.querySelector('.wrapper').style.display = 'none';
     document.querySelector('.input').style.display = '';
+    
 });
